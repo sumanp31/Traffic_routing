@@ -1,24 +1,21 @@
-
-
-
-
-PROBLEM  STATEMENT
+# Traffic Routing
+###PROBLEM  STATEMENT
 While travelling from one place to another  a person may have multiple choices of choosing a path .However, in real life scenario not every path is a good choice as some paths may cause time delay due to various factors like varying traffic conditions or road blockage. In this project we are trying to formulate an algorithm to minimize the time delay of the person travelling.
-ASSUMPTIONS
+###ASSUMPTIONS
 1.The varying traffic conditions at any instant is deterministic.
 2.We are considering one person who is travelling from source to destination ,which implies that there is no capacity constraint.
 3.Time taken to travel from a node to itself is assumed “0” and the time taken to travel between nodes which are not connected directly is”∞”.
 4.The paths are directed & hence the time taken to tranverse in opposite direction is “∞”.
-OUR MODEL
+###OUR MODEL
 We have considered a multiroute model where the nodes are the checkpoints,where node is a point where person has a choice to choose an alternate  path .
 The shortest path is calculated at the source and at every node, the person encounters in his path, the shortest path is updated as per the change in the traffic scenario. This updation is centrally done which implies that every node has the updated traffic information for the whole network.
-MODEL PARAMETERS
+###MODEL PARAMETERS
 1. Number of nodes is N.
 2. Time taken by the person to travel from one node to another is stored W1, where wij the time taken
  to  travel from node i to j.
 3. Set of all the possible paths between source and destination ,X.
 4. Set of delays for each possible path,Z.
-ALGORITHM
+###ALGORITHM
 AT FIRST NODE  ie. SOURCE
     1. Given weight matrix, W.
     2. Now we determine the possible paths between source and destination and stored in X.
@@ -45,28 +42,20 @@ The person moves to X(s,3)
 
 
 
-RESULTS :
+###RESULTS :
+![](https://github.com/sumanp31/Traffic_routing/blob/master/img0.jpg) 
+![](https://github.com/sumanp31/Traffic_routing/blob/master/img1.jpg) 
 
-
-
-
-
-
-
-
-
-
-
-CONCLUSIONS:
+###CONCLUSIONS:
     • The path selected at first has higher weight associated with it.
     •  But, the updation at each node resulted in lower cost .
     • Lower computation time, as we eliminate the infeasible paths and calculate total weight only when there is a change in weight.
     • Algorithm adapts to the dynamic changes in weight matrix .
 
 
-MATLAB CODES
+MATLAB CODES : Files are attached
 
-MAIN PROGRAM
+###MAIN PROGRAM
 
 clc;
 close all;
@@ -108,11 +97,9 @@ while(A~=N)
     l=l+1;  
 end
  
-M
-p
 
- FUNCTIONS USED
-WEIGHT MATRIX GENERATION
+### FUNCTIONS USED
+####WEIGHT MATRIX GENERATION
 function W=weight(N)
  
 W=1000*ones(N);
@@ -155,7 +142,7 @@ p=randperm(N-2)+1;
 
 
 
-POSSIBLE PATH FUNCTION
+####POSSIBLE PATH FUNCTION
 function x=possible_path(N)
  
 x=[1 N zeros(1,N-2)];
@@ -172,7 +159,7 @@ for i=1:N-2
 end
 
 
-WEIGHT CORRESPONDING TO EACH POSSIBLE PATH
+####WEIGHT CORRESPONDING TO EACH POSSIBLE PATH
 function Z=delay(x,W)
 [a b]=size(x);
 Z=[];
@@ -188,7 +175,7 @@ for i=1:a
     Z=[Z;V];
 End
 
-WEIGHT MATRIX UPDATION
+####WEIGHT MATRIX UPDATION
     
 function W=update_weight(W,N)
  
@@ -206,7 +193,7 @@ while (i<=t)
 end
 
 
-POSSIBLE PATH ELIMINATION FUNCTION
+####POSSIBLE PATH ELIMINATION FUNCTION
 function [X Z]=update_path(X,A,Z)
  
 a=[];
@@ -226,7 +213,7 @@ end
 X=X1;
 Z=Z1;
 
-WEIGHT UPDATION OF PATHS
+####WEIGHT UPDATION OF PATHS
 function Z=update_delay(Z,diff,X,l,N)
  
 a=[];
